@@ -25,4 +25,8 @@ public class Question implements Serializable {
     public int getID(){
         return this.id;
     }
+    @Override
+    public String toString(){
+        return "Question " + id;
+    }
 }
