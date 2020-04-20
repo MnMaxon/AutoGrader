@@ -1,6 +1,6 @@
 package com.Group4.AutoGrader.Controllers;
 
-public class ResultsController extends Controller {
+public class EditController extends Controller {
 	/**
 	 * Gives the xml file name, eg: MainView.fxml
 	 *
@@ -8,6 +8,6 @@ public class ResultsController extends Controller {
 	 */
 	@Override
 	public String getFileName() {
-		return "ResultsView.fxml";
+		return "EditView.fxml";
 	}
 }

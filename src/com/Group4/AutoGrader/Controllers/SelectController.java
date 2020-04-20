@@ -8,6 +8,6 @@ public class SelectController extends Controller {
 	 */
 	@Override
 	public String getFileName() {
-		return "ResultView.fxml";
+		return "SelectAssignmentView.fxml";
 	}
 }

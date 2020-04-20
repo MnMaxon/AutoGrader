@@ -9,4 +9,7 @@ public class MainController extends Controller {	/**
 public String getFileName() {
 	return "MainView.fxml";
 }
+public void manage(){
+	new SelectController().show();
+}
 }
