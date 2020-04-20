@@ -33,7 +33,7 @@ public class EditController extends Controller {
 	public Button saveBtn;
 	public Button deleteBtn;
 	public Button replaceBtn;
-	public ArrayList<Question> questions;
+	public ArrayList<Question> questions = new ArrayList<>();
 	public ObservableList<Question> quest = FXCollections.observableArrayList();
 	public boolean replace;
 	public EditController(String file) throws IOException {
@@ -45,14 +45,15 @@ public class EditController extends Controller {
 		outputArea.setVisible(false);
 		replaceBtn.setVisible(false);
 		asmt = file;
+
 		try {
 			if(new File(asmt).exists()) {
 				FileInputStream fin = new FileInputStream(asmt);
 				ObjectInputStream in = new ObjectInputStream(fin);
 				questions = (ArrayList<Question>) in.readObject();
 				quest.addAll(questions);
-				Comparator<Question> q = Comparator.comparingInt(Question::getID);
-				quest.sort(q);
+				//Comparator<Question> q = Comparator.comparingInt(Question::getID);
+				//quest.sort(q);
 				list.setItems(quest);
 				System.out.println("giunksbrljntb");
 			}else {
@@ -61,7 +62,7 @@ public class EditController extends Controller {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println(questions.size());
 
 	}
 	@Override
@@ -71,12 +72,8 @@ public class EditController extends Controller {
 	public void select(){
 		new SelectController().show();
 	}
-	public void editAsmt(){
-		if(new File(asmt).exists()) System.out.println("lvkjsnvskj");
-	}
 	public void save() throws IOException {
 		if(questions == null){
-			questions = new ArrayList<Question>();
 			Question temp = new Question(1, inputArea.getText(), outputArea.getText());
 			questions.add(temp);
 		}
@@ -123,5 +120,18 @@ public class EditController extends Controller {
 			e.printStackTrace();
 		}
 		new MainController().show();
+	}
+	public void delete() throws IOException {
+		Question temp = (Question) list.getSelectionModel().getSelectedItem();
+		questions.remove(temp);
+		int newID = 1;
+		for(Question q: questions){
+			q.setID(newID);
+			newID++;
+		}
+		FileOutputStream file = new FileOutputStream(asmt);
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(questions);
+		new EditController(asmt).show();
 	}
 }
