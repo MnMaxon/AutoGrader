@@ -10,4 +10,7 @@ public class RunController extends Controller {
 	public String getFileName() {
 		return "RunAssignmentView.fxml";
 	}
+	public void home(){
+		new MainController().show();
+	}
 }

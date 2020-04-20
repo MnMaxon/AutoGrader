@@ -12,4 +12,7 @@ public String getFileName() {
 public void manage(){
 	new SelectController().show();
 }
+public void grade(){
+	new RunController().show();
+}
 }

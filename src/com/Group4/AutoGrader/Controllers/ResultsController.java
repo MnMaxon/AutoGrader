@@ -10,4 +10,7 @@ public class ResultsController extends Controller {
 	public String getFileName() {
 		return "ResultsView.fxml";
 	}
+	public void home(){
+		new MainController().show();
+	}
 }

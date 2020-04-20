@@ -46,4 +46,5 @@ public abstract class Controller {
 		AutoGrader.getMainStage().setScene(new Scene(root, 600, 400));
 		AutoGrader.getMainStage().show();
 	}
+
 }

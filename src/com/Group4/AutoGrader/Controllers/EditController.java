@@ -10,4 +10,7 @@ public class EditController extends Controller {
 	public String getFileName() {
 		return "EditView.fxml";
 	}
+	public void select(){
+		new SelectController().show();
+	}
 }

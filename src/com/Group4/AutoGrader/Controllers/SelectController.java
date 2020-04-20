@@ -10,4 +10,11 @@ public class SelectController extends Controller {
 	public String getFileName() {
 		return "SelectAssignmentView.fxml";
 	}
+	public void home(){
+		new MainController().show();
+	}
+	public void edit(){
+		//TODO open file that they select
+		new EditController().show();
+	}
 }

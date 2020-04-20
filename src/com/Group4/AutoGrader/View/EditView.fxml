@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="107.0" layoutY="351.0" mnemonicParsing="false" text="Add Input and Output" />
@@ -25,6 +24,6 @@
         </content>
       </ScrollPane>
       <Button layoutX="264.0" layoutY="351.0" mnemonicParsing="false" text="Save and Quit" />
-      <Button layoutX="377.0" layoutY="351.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="377.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#select" text="Cancel" />
    </children>
 </Pane>
