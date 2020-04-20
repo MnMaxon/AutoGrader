@@ -19,11 +19,12 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button layoutX="264.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#save" text="Save and Quit" />
+      <Button layoutX="264.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#savenquit" text="Save and Quit" />
       <Button layoutX="377.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#select" text="Cancel" />
-      <Button fx:id="saveBtn" layoutX="545.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#editAsmt" text="Save" />
+      <Button fx:id="saveBtn" layoutX="545.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
       <TextArea fx:id="inputArea" layoutX="402.0" layoutY="89.0" prefHeight="45.0" prefWidth="189.0" promptText="Input" />
       <TextArea fx:id="outputArea" layoutX="402.0" layoutY="149.0" prefHeight="45.0" prefWidth="189.0" promptText="Output" />
-      <Button fx:id="deleteBtn" layoutX="425.0" layoutY="214.0" mnemonicParsing="false" text="Delete Question" />
+      <Button fx:id="deleteBtn" layoutX="418.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete Question" />
+      <Button fx:id="replaceBtn" layoutX="418.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#replace" text="Replace" />
    </children>
 </Pane>
