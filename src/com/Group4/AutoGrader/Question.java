@@ -25,6 +25,16 @@ public class Question implements Serializable {
     public int getID(){
         return this.id;
     }
+    public void setInput(String input){
+        this.input = input;
+    }
+    public void setOutput(String output){
+        this.output = output;
+    }
+    public void setID(int id){
+        this.id = id;
+    }
+
     @Override
     public String toString(){
         return "Question " + id;
