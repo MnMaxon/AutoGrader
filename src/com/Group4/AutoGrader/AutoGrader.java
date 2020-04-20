@@ -2,11 +2,19 @@ package com.Group4.AutoGrader;
 
 import com.Group4.AutoGrader.Controllers.MainController;
 import com.Group4.AutoGrader.Model.User;
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.DockerCmdExecFactory;
+import com.github.dockerjava.api.model.Info;
+import com.github.dockerjava.core.DefaultDockerClientConfig;
+import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.jaxrs.JerseyDockerCmdExecFactory;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The main class, handles initially setting up the project
@@ -53,6 +61,31 @@ public class AutoGrader extends Application {
 		primaryStage.setTitle("AutoGrader");
 		mainStage = primaryStage;
 		new MainController().show();
+		dockerTest();
+	}
+
+	public void dockerTest() {
+		try {
+			Runtime rt = Runtime.getRuntime();
+			System.out.println("AAAAAAA");
+			rt.exec("docker rm AutoGrader");
+			Process pr = rt.exec("docker run --name AutoGrader hello-world");
+			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+
+			String line=null;
+			while((line=input.readLine()) != null) {
+				System.out.println(line);
+			}
+
+			int exitVal = pr.waitFor();
+			System.out.println("Exited with error code "+exitVal);
+
+			rt.exec("docker rm AutoGrader");
+			System.out.println("Done");
+		} catch (Exception e) {
+			System.out.println("Docker ERROR");
+			e.printStackTrace();
+		}
 	}
 
 	/**

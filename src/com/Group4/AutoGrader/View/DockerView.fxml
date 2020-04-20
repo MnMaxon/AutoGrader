@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="163.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert Docker Information">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <Button layoutX="480.0" layoutY="321.0" mnemonicParsing="false" text="Save">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <TextField id="FromField" layoutX="182.0" layoutY="121.0" prefHeight="37.0" prefWidth="317.0" promptText="Image">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="The image this comes from" />
+         </tooltip>
+      </TextField>
+      <Button layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#home" text="&lt; Home">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="fileName" layoutX="251.0" layoutY="134.0" visible="false" />
+      <Text layoutX="124.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextField layoutX="182.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" promptText="CMD">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="The command that is run before creating the image" />
+         </tooltip>
+      </TextField>
+      <Text layoutX="134.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CMD:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text layoutX="89.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Prefix:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextField layoutX="183.0" layoutY="225.0" prefHeight="37.0" prefWidth="317.0" promptText="Prefix">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="A prefix that will go before every input (eg: Java Application.jar)" />
+         </tooltip>
+      </TextField>
+   </children>
+</Pane>
