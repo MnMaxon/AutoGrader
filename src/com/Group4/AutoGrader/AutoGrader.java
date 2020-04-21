@@ -1,6 +1,7 @@
 package com.Group4.AutoGrader;
 
 import com.Group4.AutoGrader.Controllers.MainController;
+import com.Group4.AutoGrader.Model.DockerUtils;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -47,31 +48,44 @@ public class AutoGrader extends Application {
 		primaryStage.setTitle("AutoGrader");
 		mainStage = primaryStage;
 		new MainController().show();
-		dockerTest();
+		DockerUtils.test();
+//		dockerTest();
 	}
 
 	public void dockerTest() {
+		runCommand("docker rm AutoGrader");
+		System.out.println(runCommandString("docker run --name AutoGrader hello-world"));
+		runCommand("docker rm AutoGrader");
+	}
+
+	public static ArrayList<String> runCommand(String command) {
+		ArrayList<String> ar = new ArrayList<>();
 		try {
 			Runtime rt = Runtime.getRuntime();
-			System.out.println("AAAAAAA");
-			rt.exec("docker rm AutoGrader");
-			Process pr = rt.exec("docker run --name AutoGrader hello-world");
+			Process pr = rt.exec(command);
 			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 
-			String line=null;
-			while((line=input.readLine()) != null) {
-				System.out.println(line);
-			}
-
-			int exitVal = pr.waitFor();
-			System.out.println("Exited with error code "+exitVal);
-
-			rt.exec("docker rm AutoGrader");
-			System.out.println("Done");
+			ArrayList<String> list = new ArrayList<>();
+			String line = null;
+//			int exitVal = pr.waitFor();
+//			System.out.println("Exited with error code " + exitVal);
+			while ((line = input.readLine()) != null) list.add(line);
+			return list;
 		} catch (Exception e) {
-			System.out.println("Docker ERROR");
 			e.printStackTrace();
+			ArrayList<String> ret = new ArrayList<>();
+			ret.add(e.getMessage());
+			return ret;
 		}
+	}
+
+	public static String runCommandString(String command) {
+		StringBuilder ret = new StringBuilder();
+		for (String s : runCommand(command)) {
+			if (!ret.toString().equals("")) ret.append("\n");
+			ret.append(s);
+		}
+		return ret.toString();
 	}
 
 	/**
