@@ -1,20 +1,11 @@
 package com.Group4.AutoGrader;
 
 import com.Group4.AutoGrader.Controllers.MainController;
-import com.Group4.AutoGrader.Model.User;
-import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.DockerCmdExecFactory;
-import com.github.dockerjava.api.model.Info;
-import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.DockerClientBuilder;
-import com.github.dockerjava.core.DockerClientConfig;
-import com.github.dockerjava.jaxrs.JerseyDockerCmdExecFactory;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The main class, handles initially setting up the project
@@ -27,11 +18,6 @@ public class AutoGrader extends Application {
 	 * The main jfx stage
 	 */
 	private static Stage mainStage;
-
-	/**
-	 * All of the users on the application
-	 */
-	public static ArrayList<User> users = new ArrayList<>();
 
 	/**
 	 * Gives the main jfx stage, used to switch between views

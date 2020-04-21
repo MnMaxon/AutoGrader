@@ -16,26 +16,32 @@ public class SelectController extends Controller {
 	public TextField fileName;
 	public Button confirmBtn;
 	public Button cancelBtn;
+
 	@Override
 	public String getFileName() {
 		return "SelectAssignmentView.fxml";
 	}
-	public void home(){
+
+	public void home() {
 		new MainController().show();
 	}
-	public void edit(){
+
+	public void edit() {
 		//TODO open file that they select
 		//new EditController().show();
 	}
-	public void newAssignment(){
+
+	public void newAssignment() {
 		fileName.setVisible(true);
 		confirmBtn.setVisible(true);
 		cancelBtn.setVisible(true);
 	}
+
 	public void makeAssignment() throws IOException {
-		new EditController(fileName.getText()).show();
+		new DockTemplateController(fileName.getText()).show();
 	}
-	public void toggleVis(){
+
+	public void toggleVis() {
 		fileName.setVisible(false);
 		confirmBtn.setVisible(false);
 		cancelBtn.setVisible(false);

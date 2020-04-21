@@ -1,4 +1,4 @@
-package com.Group4.AutoGrader;
+package com.Group4.AutoGrader.Model;
 
 import java.io.Serializable;
 

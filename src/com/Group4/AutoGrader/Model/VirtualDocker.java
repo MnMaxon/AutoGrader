@@ -1,27 +1,33 @@
-package com.Group4.AutoGrader;
+package com.Group4.AutoGrader.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class VirtualDocker {
+public class VirtualDocker implements Serializable {
 	private String image;
 	private String cmd;
 	private String inputPrefix;
 
 	private String dockerText = null;
 
-	public VirtualDocker(String dockerText) {
+	public void setDockerText(String dockerText) {
 		this.dockerText = dockerText;
 	}
 
-	public VirtualDocker(String image, String cmd, String inputPrefix) {
+	public String getDockerText() {
+		return dockerText;
+	}
+
+	public void setDockerInfo(String image, String cmd, String inputPrefix) {
+		if (image == null) image = "";
+		if (cmd == null) cmd = "";
+		if (inputPrefix == null) inputPrefix = "";
 		this.image = image;
 		this.cmd = cmd;
 		this.inputPrefix = inputPrefix;
 	}
 
 	public String generateFinal(String projectLocation, List<Question> questions) {
-		if (inputPrefix == null) inputPrefix = "";
-		else inputPrefix += " ";
 		String ret = "";
 		if (dockerText != null) {
 			ret = dockerText.replace("**PROJ_LOC**", projectLocation);
@@ -33,9 +39,19 @@ public class VirtualDocker {
 		}
 		if (questions.size() == 0) return ret;
 		ret += "\nRUN ";
-		ret += questions.get(0).input;
+		ret += inputPrefix + questions.get(0).input;
 		for (int i = 1; i < questions.size(); i++)
 			ret += " && " + inputPrefix + questions.get(i).input;
 		return ret;
+	}
+
+	public String getImage() {
+		return image;
+	}
+	public String getCmd() {
+		return cmd;
+	}
+	public String getPrefix() {
+		return inputPrefix;
 	}
 }

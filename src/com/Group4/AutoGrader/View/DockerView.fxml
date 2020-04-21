@@ -14,12 +14,12 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <Button layoutX="480.0" layoutY="321.0" mnemonicParsing="false" text="Save">
+      <Button layoutX="480.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#save" text="Save">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField id="FromField" layoutX="182.0" layoutY="121.0" prefHeight="37.0" prefWidth="317.0" promptText="Image">
+      <TextField fx:id="fromField" layoutX="182.0" layoutY="121.0" prefHeight="37.0" prefWidth="317.0" promptText="Image">
          <font>
             <Font size="16.0" />
          </font>
@@ -32,13 +32,12 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="fileName" layoutX="251.0" layoutY="134.0" visible="false" />
       <Text layoutX="124.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM:">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <TextField layoutX="182.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" promptText="CMD">
+      <TextField fx:id="cmdField" layoutX="182.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" promptText="CMD">
          <font>
             <Font size="16.0" />
          </font>
@@ -56,7 +55,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <TextField layoutX="183.0" layoutY="225.0" prefHeight="37.0" prefWidth="317.0" promptText="Prefix">
+      <TextField fx:id="prefixField" layoutX="183.0" layoutY="225.0" prefHeight="37.0" prefWidth="317.0" promptText="Prefix">
          <font>
             <Font size="16.0" />
          </font>

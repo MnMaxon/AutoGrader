@@ -1,33 +1,26 @@
 package com.Group4.AutoGrader.Controllers;
 
+import com.Group4.AutoGrader.Model.Assignment;
+import javafx.scene.control.TextArea;
+
 public class EmptyDockerController extends Controller {
+
+	private final Assignment assignment;
+	public TextArea textArea;
+
+	public EmptyDockerController(Assignment assignment) {
+		this.assignment = assignment;
+		textArea.setText(this.assignment.getDocker().getDockerText());
+	}
+
+	public void save() {
+		assignment.getDocker().setDockerText(textArea.getText());
+		assignment.save();
+		new EditController(assignment).show();
+	}
 
 	public void home() {
 		new MainController().show();
-	}
-
-	public void customDocker() {
-		//TODO
-	}
-
-	public void emptyTemplate() {
-		new DockerController("", "").show();
-	}
-
-	public void jdk13() {
-		new DockerController("openjdk:13", "java -jar FILE.jar").show();
-	}
-
-	public void jdk8() {
-		new DockerController("openjdk:8", "java -jar FILE.jar").show();
-	}
-
-	public void python3() {
-		new DockerController("python:3", "python ./SCRIPT.py").show();
-	}
-
-	public void ubuntu() {
-		new DockerController("ubuntu:latest", "").show();
 	}
 
 	/**

@@ -1,33 +1,64 @@
 package com.Group4.AutoGrader.Controllers;
 
+import com.Group4.AutoGrader.Model.Assignment;
+import com.Group4.AutoGrader.Model.VirtualDocker;
+
 public class DockTemplateController extends Controller {
+
+	private String fileName;
+	private Assignment assignment;
+
+	public DockTemplateController(String fileName) {
+		this(Assignment.load(fileName));
+	}
+
+	public DockTemplateController(Assignment assignment) {
+		this.assignment = assignment;
+		VirtualDocker d = this.assignment.getDocker();
+		if (d.getDockerText() != null) {
+			cancelShow = true;
+			new EmptyDockerController(assignment).show();
+		} else if (d.getCmd() != null && d.getImage() != null && d.getPrefix() != null) {
+			cancelShow = true;
+			new DockerController(assignment).show();
+		}
+	}
 
 	public void home() {
 		new MainController().show();
 	}
 
 	public void customDocker() {
-		new EmptyDockerController().show();
+		assignment.getDocker().setDockerText(
+				"FROM openjdk:13\n\n" +
+				"WORKDIR /usr/local/runme\n\n" +
+				"COPY **PROJ_LOC** /");
+		new EmptyDockerController(assignment).show();
 	}
 
 	public void emptyTemplate() {
-		new DockerController("", "").show();
+		openDC("", "");
 	}
 
 	public void jdk13() {
-		new DockerController("openjdk:13", "java FILE.jar").show();
+		openDC("openjdk:13", "java -jar FILE.jar ");
 	}
 
 	public void jdk8() {
-		new DockerController("openjdk:8", "java FILE.jar").show();
+		openDC("openjdk:8", "java -jar FILE.jar ");
 	}
 
 	public void python3() {
-		new DockerController("python:3", "python ./SCRIPT.py").show();
+		openDC("python:3", "python ./SCRIPT.py ");
 	}
 
 	public void ubuntu() {
-		new DockerController("ubuntu:latest", "").show();
+		openDC("ubuntu:latest", "");
+	}
+
+	private void openDC(String image, String cmdPrefix) {
+		assignment.getDocker().setDockerInfo(image, "", cmdPrefix);
+		new DockerController(assignment).show();
 	}
 
 	/**

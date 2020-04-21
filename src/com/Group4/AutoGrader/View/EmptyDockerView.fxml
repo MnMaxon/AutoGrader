@@ -13,7 +13,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <Button layoutX="513.0" layoutY="16.0" mnemonicParsing="false" text="Save">
+      <Button layoutX="513.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#save" text="Save">
          <font>
             <Font size="16.0" />
          </font>
@@ -23,6 +23,6 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <TextArea layoutX="14.0" layoutY="79.0" prefHeight="308.0" prefWidth="554.0" text="FROM openjdk:13&#10;&#10;WORKDIR /usr/local/runme&#10;&#10;COPY **PROJ_LOC** /" />
+      <TextArea fx:id="textArea" layoutX="14.0" layoutY="79.0" prefHeight="308.0" prefWidth="554.0" />
    </children>
 </Pane>

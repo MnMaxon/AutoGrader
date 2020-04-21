@@ -19,6 +19,8 @@ public abstract class Controller {
 	 */
 	private final Parent root;
 
+	public boolean cancelShow = false;
+
 	/**
 	 * Sets up the FxmlLoader at the controller's file
 	 */
@@ -43,6 +45,7 @@ public abstract class Controller {
 	 * Shows the fxml file on the main stage
 	 */
 	public void show(){
+		if (cancelShow) return;
 		AutoGrader.getMainStage().setScene(new Scene(root, 600, 400));
 		AutoGrader.getMainStage().show();
 	}
