@@ -11,12 +11,15 @@ public class DockerUtils {
 			File f = new File("autoTest");
 			if (f.exists()) f.delete();
 			Assignment assignment = Assignment.load("autoTest");
-			assignment.getDocker().setDockerInfo("openjdk:8-jdk-alpine", "", "cd C: && ls");
+			assignment.getDocker().setDockerInfo("openjdk:13-jdk-alpine", "", "java -jar artifacts/untitled_jar/untitled.jar");
 //			assignment.getDocker().setDockerInfo("openjdk:13", "", "java -jar untitled.jar");
+			assignment.getQuestions().add(new Question(0, "", "0.0"));
+			assignment.getQuestions().add(new Question(0, "rrr", "0.0"));
 			assignment.getQuestions().add(new Question(0, "", "0.0"));
 			generateDockerFile(assignment, "C:\\Users\\User\\IdeaProjects\\untitled\\out");
 			generateImage();
 			System.out.println(runDocker());
+			System.out.println("Done");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

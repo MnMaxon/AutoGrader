@@ -37,15 +37,15 @@ public class VirtualDocker implements Serializable {
 		} else {
 			ret = "FROM " + image;
 			ret += "\nWORKDIR usr/local/runme";
-			ret += "\nADD " + projectLocation + " /";
+			ret += "\nCOPY " + projectLocation + " project";
 			if (!cmd.equals(""))
 				ret += "\nCMD " + cmd;
 		}
 		if (questions.size() == 0) return ret;
-		ret += "\nCMD ";
+		ret += "\nCMD cd project;";
 		ret += inputPrefix + questions.get(0).input;
 		for (int i = 1; i < questions.size(); i++)
-			ret += " ; ls " + DELIM + " ; " + inputPrefix + questions.get(i).input;
+			ret += " ; echo " + DELIM + ";echo" + DELIM + " ; " + inputPrefix + questions.get(i).input;
 		return ret;
 	}
 

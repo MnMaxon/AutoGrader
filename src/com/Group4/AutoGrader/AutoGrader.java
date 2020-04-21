@@ -1,11 +1,14 @@
 package com.Group4.AutoGrader;
 
 import com.Group4.AutoGrader.Controllers.MainController;
+import com.Group4.AutoGrader.Model.Assignment;
 import com.Group4.AutoGrader.Model.DockerUtils;
+import com.Group4.AutoGrader.Model.VirtualDocker;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -64,12 +67,24 @@ public class AutoGrader extends Application {
 			Runtime rt = Runtime.getRuntime();
 			Process pr = rt.exec(command);
 			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+			BufferedReader error = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
+			ProcessBuilder pv = new ProcessBuilder();
 
 			ArrayList<String> list = new ArrayList<>();
 			String line = null;
+
+
 //			int exitVal = pr.waitFor();
 //			System.out.println("Exited with error code " + exitVal);
-			while ((line = input.readLine()) != null) list.add(line);
+			while ((line = input.readLine()) != null) {
+				if (line.equals(VirtualDocker.DELIM)){
+					String eLine;
+					while ((eLine = error.readLine()) != null && !eLine.contains(VirtualDocker.DELIM))
+						list.add(eLine);
+				}
+				list.add(line);
+			}
+			while ((line = error.readLine()) != null) list.add(line);
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
