@@ -51,7 +51,7 @@ public class MultipleResultsController extends Controller {
 					correct++;
 			}
 			addLabel(projectNames.get(j), 0, j);
-			double grade = (int) (1000. * (correct * 10.) / (assignment.getQuestions().size() * .1)) / 1000.;
+			double grade = Math.round(1000. * (correct * 10) / (assignment.getQuestions().size() * .1)) / 1000.;
 			addLabel(grade + "", 1, j);
 			grades.add(grade);
 		}

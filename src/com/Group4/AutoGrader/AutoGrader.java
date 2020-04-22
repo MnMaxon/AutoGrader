@@ -91,7 +91,6 @@ public class AutoGrader extends Application {
 		primaryStage.setTitle("AutoGrader");
 		mainStage = primaryStage;
 		new MainController().show();
-		DockerUtils.test();
 	}
 
 	public static void saveRecents() {

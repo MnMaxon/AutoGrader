@@ -65,10 +65,10 @@ public class EditController extends Controller {
 			asmt.getQuestions().add(temp);
 		} else {
 			Question temp = (Question) list.getSelectionModel().getSelectedItem();
-			Question othertemp = asmt.getQuestions().remove(temp.getID() - 1);
-			othertemp.setInput(inputArea.getText());
-			othertemp.setOutput(outputArea.getText());
-			asmt.getQuestions().add(othertemp);
+//			Question othertemp = asmt.getQuestions().remove(temp.getID() - 1);
+			temp.setInput(inputArea.getText());
+			temp.setOutput(outputArea.getText());
+//			asmt.getQuestions().add(othertemp);
 		}
 		AutoGrader.saveRecents();
 		asmt.save();

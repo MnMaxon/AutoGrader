@@ -47,7 +47,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Text layoutX="270.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XX% Correct" />
+      <Text fx:id="correct" layoutX="270.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XX% Correct" />
       <Text layoutX="27.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct" />
       <Text layoutX="456.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Output" />
       <Text layoutX="291.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expected Output" />

@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class ResultsController extends Controller {
 	private final List<String> answers;
 	public GridPane grid;
 	public CheckBox filterCheck;
+	public Text correct;
 	private ArrayList<ArrayList<VBox>> vboxes = new ArrayList<>();
 	private ArrayList<ArrayList<String>> strings = new ArrayList<>();
 	private ArrayList<VBox> selected = new ArrayList<>();
@@ -50,6 +52,7 @@ public class ResultsController extends Controller {
 			addLabel(answers.get(i), 3, shown);
 			shown++;
 		}
+		this.correct.setText(Math.round(1000. * (correct * 10) / (assignment.getQuestions().size() * .1)) / 1000.+"% Correct");;
 		grid.getStyleClass().add("grid");
 		grid.setGridLinesVisible(true);
 	}

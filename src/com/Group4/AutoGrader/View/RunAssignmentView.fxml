@@ -34,7 +34,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <RadioButton layoutX="322.0" layoutY="208.0" mnemonicParsing="false" text="Multiple Projects" />
+      <RadioButton fx:id="multipleRadio" layoutX="322.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#multipleClick" text="Multiple Projects" />
       <RadioButton fx:id="singleRadio" layoutX="200.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#singleClick" selected="true" text="Single Project" />
       <TextField fx:id="asgmtLoc" layoutX="203.0" layoutY="236.0" promptText="Assignment Location">
          <font>

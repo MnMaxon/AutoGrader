@@ -46,10 +46,13 @@ public class DockerUtils {
 	}
 
 	public static void generateDockerFile(Assignment assignment, String projectLocation) {
+		System.out.println("********");
+		System.out.println(projectLocation);
 		File proj = new File(projectLocation);
 		if (!proj.exists()) return;
 		if (!proj.isDirectory()) proj = new File(proj.getParent());
 		File copytoFile = new File("projects/" + proj.getName());
+		System.out.println("1!");
 		try {
 			if (copytoFile.exists()) FileUtils.deleteDirectory(copytoFile);
 			FileUtils.copyDirectory(proj, copytoFile);
@@ -59,7 +62,7 @@ public class DockerUtils {
 			return;
 		}
 
-
+System.out.println("2!");
 		try {
 			File file = new File("Dockerfile");
 			if (file.exists()) file.delete();
@@ -68,6 +71,7 @@ public class DockerUtils {
 			ex.printStackTrace();
 		}
 		try {
+			System.out.println("3!");
 			FileWriter writer = new FileWriter("Dockerfile");
 			writer.write(assignment.getDocker().generateFinal(copytoFile.getPath(), assignment.getQuestions()));
 			writer.close();

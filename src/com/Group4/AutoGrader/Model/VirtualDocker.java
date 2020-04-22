@@ -30,6 +30,7 @@ public class VirtualDocker implements Serializable {
 	}
 
 	public String generateFinal(String projectLocation, List<Question> questions) {
+		System.out.println("-"+projectLocation);
 		projectLocation = '\"' + projectLocation.replace("\\", "/") + '\"';
 		String ret = "";
 		if (dockerText != null) {
