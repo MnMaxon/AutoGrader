@@ -14,7 +14,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <Button fx:id = "runBtn" disable="true" layoutX="518.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#run" text="Run">
+      <Button fx:id="runBtn" disable="true" layoutX="518.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#run" text="Run">
          <font>
             <Font size="16.0" />
          </font>
@@ -24,7 +24,7 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <Button layoutX="412.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#open" text="...">
+      <Button layoutX="412.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#openProj" text="...">
          <font>
             <Font size="16.0" />
          </font>
@@ -41,7 +41,7 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <Button layoutX="415.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#openProj" text="...">
+      <Button layoutX="415.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#open" text="...">
          <font>
             <Font size="16.0" />
          </font>

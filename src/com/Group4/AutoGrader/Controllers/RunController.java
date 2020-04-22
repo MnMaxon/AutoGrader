@@ -6,6 +6,7 @@ import com.Group4.AutoGrader.Model.DockerUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -46,6 +47,7 @@ public class RunController extends Controller {
 	public void open(){
 		//TODO open file that they select
 		//new EditController().show();
+		runBtn.setVisible(true);
 		FileChooser filechooser = new FileChooser();
 		filechooser.setTitle("Choose Assignment File");
 		Stage stage = new Stage();
@@ -59,18 +61,16 @@ public class RunController extends Controller {
 	public void openProj(){
 		//TODO open file that they select
 		//new EditController().show();
-		FileChooser filechooser = new FileChooser();
+		DirectoryChooser filechooser = new DirectoryChooser();
 		filechooser.setTitle("Choose Project Folder");
 		Stage stage = new Stage();
-		File file = filechooser.showOpenDialog(stage);
+		File file = filechooser.showDialog(stage);
 		if(file.isDirectory()){
 			project = true;
-			projLoc.setText(file.getAbsolutePath());
+			projLoc.setText(file.getPath());
 		}
 	}
 	public void run(){
-		if(assignment && project){
-			runBtn.setVisible(true);
 			if(multipleRadio.isSelected()) {
 				File file = new File(projLoc.getText());
 				List<String> projects = Arrays.asList(file.list());
