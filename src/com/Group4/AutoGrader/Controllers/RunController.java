@@ -47,7 +47,6 @@ public class RunController extends Controller {
 	public void open(){
 		//TODO open file that they select
 		//new EditController().show();
-		runBtn.setVisible(true);
 		FileChooser filechooser = new FileChooser();
 		filechooser.setTitle("Choose Assignment File");
 		Stage stage = new Stage();
@@ -57,6 +56,7 @@ public class RunController extends Controller {
 			asgmtLoc.setText(file.getAbsolutePath());
 			assignment = true;
 		}
+		checkRun();
 	}
 	public void openProj(){
 		//TODO open file that they select
@@ -69,6 +69,11 @@ public class RunController extends Controller {
 			project = true;
 			projLoc.setText(file.getPath());
 		}
+		checkRun();
+	}
+	public void checkRun(){
+		if(assignment && project) runBtn.setDisable(false);
+		else runBtn.setDisable(true);
 	}
 	public void run(){
 			if(multipleRadio.isSelected()) {
@@ -85,5 +90,4 @@ public class RunController extends Controller {
 				new ResultsController(this, Assignment.load(asgmtLoc.getText()),answers).show();
 			}
 		}
-	}
 }
