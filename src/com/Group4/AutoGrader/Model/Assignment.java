@@ -58,6 +58,10 @@ public class Assignment implements Serializable {
 		if (asmt == null) asmt = new Assignment();
 		asmt.lastLoc = fileLocation;
 		if(!AutoGrader.files.contains(asmt.lastLoc)) AutoGrader.files.add(0,asmt.lastLoc);
+		else{
+			AutoGrader.files.remove(asmt.lastLoc);
+			AutoGrader.files.add(0, asmt.lastLoc);
+		}
 		System.out.println(AutoGrader.files);
 		return asmt;
 	}
