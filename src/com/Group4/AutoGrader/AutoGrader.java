@@ -51,7 +51,18 @@ public class AutoGrader extends Application {
 		new MainController().show();
 		dockerTest();
 	}
-
+	public void saveRecents(){
+		File f = new File("data.txt");
+		try{
+			FileOutputStream file = new FileOutputStream(f);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			out.writeObject(files);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public void dockerTest() {
 		try {
 			Runtime rt = Runtime.getRuntime();
