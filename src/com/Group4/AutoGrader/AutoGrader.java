@@ -1,14 +1,11 @@
 package com.Group4.AutoGrader;
 
 import com.Group4.AutoGrader.Controllers.MainController;
-import com.Group4.AutoGrader.Model.Assignment;
-import com.Group4.AutoGrader.Model.DockerUtils;
-import com.Group4.AutoGrader.Model.VirtualDocker;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +19,7 @@ public class AutoGrader extends Application {
 	 * The main jfx stage
 	 */
 	private static Stage mainStage;
+	public static ArrayList<String> files = new ArrayList<>();
 
 	/**
 	 * Gives the main jfx stage, used to switch between views
@@ -51,56 +49,31 @@ public class AutoGrader extends Application {
 		primaryStage.setTitle("AutoGrader");
 		mainStage = primaryStage;
 		new MainController().show();
-		DockerUtils.test();
-//		dockerTest();
+		dockerTest();
 	}
 
 	public void dockerTest() {
-		runCommand("docker rm AutoGrader");
-		System.out.println(runCommandString("docker run --name AutoGrader hello-world"));
-		runCommand("docker rm AutoGrader");
-	}
-
-	public static ArrayList<String> runCommand(String command) {
-		ArrayList<String> ar = new ArrayList<>();
 		try {
 			Runtime rt = Runtime.getRuntime();
-			Process pr = rt.exec(command);
+			System.out.println("AAAAAAA");
+			rt.exec("docker rm AutoGrader");
+			Process pr = rt.exec("docker run --name AutoGrader hello-world");
 			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-			BufferedReader error = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
-			ProcessBuilder pv = new ProcessBuilder();
 
-			ArrayList<String> list = new ArrayList<>();
-			String line = null;
-
-
-//			int exitVal = pr.waitFor();
-//			System.out.println("Exited with error code " + exitVal);
-			while ((line = input.readLine()) != null) {
-				if (line.equals(VirtualDocker.DELIM)){
-					String eLine;
-					while ((eLine = error.readLine()) != null && !eLine.contains(VirtualDocker.DELIM))
-						list.add(eLine);
-				}
-				list.add(line);
+			String line=null;
+			while((line=input.readLine()) != null) {
+				System.out.println(line);
 			}
-			while ((line = error.readLine()) != null) list.add(line);
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			ArrayList<String> ret = new ArrayList<>();
-			ret.add(e.getMessage());
-			return ret;
-		}
-	}
 
-	public static String runCommandString(String command) {
-		StringBuilder ret = new StringBuilder();
-		for (String s : runCommand(command)) {
-			if (!ret.toString().equals("")) ret.append("\n");
-			ret.append(s);
+			int exitVal = pr.waitFor();
+			System.out.println("Exited with error code "+exitVal);
+
+			rt.exec("docker rm AutoGrader");
+			System.out.println("Done");
+		} catch (Exception e) {
+			System.out.println("Docker ERROR");
+			e.printStackTrace();
 		}
-		return ret.toString();
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package com.Group4.AutoGrader.Model;
 
+import com.Group4.AutoGrader.AutoGrader;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -7,7 +9,6 @@ public class Assignment implements Serializable {
 	private ArrayList<Question> questions = new ArrayList<>();
 	private VirtualDocker docker = new VirtualDocker();
 	transient private String lastLoc = "ERROR!";
-
 	private Assignment() {
 	}
 
@@ -37,6 +38,9 @@ public class Assignment implements Serializable {
 		lastLoc = location;
 		save();
 	}
+	public String getFileName(){
+		return lastLoc;
+	}
 
 	public static Assignment load(String fileLocation) {
 		Assignment asmt = null;
@@ -53,6 +57,8 @@ public class Assignment implements Serializable {
 		}
 		if (asmt == null) asmt = new Assignment();
 		asmt.lastLoc = fileLocation;
+		if(!AutoGrader.files.contains(asmt.lastLoc)) AutoGrader.files.add(0,asmt.lastLoc);
+		System.out.println(AutoGrader.files);
 		return asmt;
 	}
 }
