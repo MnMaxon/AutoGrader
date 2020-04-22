@@ -16,7 +16,7 @@ public class DockerController extends Controller {
 		VirtualDocker d = assignment.getDocker();
 		fromField.setText(d.getImage());
 		prefixField.setText(d.getPrefix());
-		cmdField.setText(d.getCmd());
+		cmdField.setText(d.getRun());
 	}
 
 	public void save() {

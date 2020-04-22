@@ -18,7 +18,7 @@ public class DockTemplateController extends Controller {
 		if (d.getDockerText() != null) {
 			cancelShow = true;
 			new EmptyDockerController(assignment).show();
-		} else if (d.getCmd() != null && d.getImage() != null && d.getPrefix() != null) {
+		} else if (d.getRun() != null && d.getImage() != null && d.getPrefix() != null) {
 			cancelShow = true;
 			new DockerController(assignment).show();
 		}
@@ -31,8 +31,9 @@ public class DockTemplateController extends Controller {
 	public void customDocker() {
 		assignment.getDocker().setDockerText(
 				"FROM openjdk:13\n\n" +
-				"WORKDIR /usr/local/runme\n\n" +
-				"COPY **PROJ_LOC** /");
+						"WORKDIR /usr/local/runme\n\n" +
+						"COPY **PROJ_LOC** project\n" +
+						"WORKDIR project");
 		new EmptyDockerController(assignment).show();
 	}
 

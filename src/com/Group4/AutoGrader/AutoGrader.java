@@ -52,9 +52,9 @@ public class AutoGrader extends Application {
 			String line = null;
 
 
-//			int exitVal = pr.waitFor();
-//			System.out.println("Exited with error code " + exitVal);
+			// Add all output to lines
 			while ((line = input.readLine()) != null) {
+				// DELIM helps synchronize outputs with errors while solving questions
 				if (line.equals(VirtualDocker.DELIM)) {
 					String eLine;
 					while ((eLine = error.readLine()) != null && !eLine.contains(VirtualDocker.DELIM))
@@ -88,18 +88,10 @@ public class AutoGrader extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) {
-		try {
-			if (new File("data.dat").exists()) {
-				//TODO Load Data
-//				//noinspection unchecked
-//				users = (ArrayList<User>) new ObjectInputStream(new FileInputStream("data.dat")).readObject();
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 		primaryStage.setTitle("AutoGrader");
 		mainStage = primaryStage;
 		new MainController().show();
+		DockerUtils.test();
 	}
 
 	public static void saveRecents() {
@@ -139,12 +131,6 @@ public class AutoGrader extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//TODO Save Data
-//		try {
-//			new ObjectOutputStream(new FileOutputStream("data.dat")).writeObject(users);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

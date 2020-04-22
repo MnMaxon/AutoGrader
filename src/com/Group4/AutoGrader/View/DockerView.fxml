@@ -37,7 +37,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="cmdField" layoutX="182.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" promptText="CMD">
+      <TextField fx:id="cmdField" layoutX="182.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" promptText="RUN">
          <font>
             <Font size="16.0" />
          </font>
@@ -45,7 +45,7 @@
             <Tooltip text="The command that is run before creating the image" />
          </tooltip>
       </TextField>
-      <Text layoutX="134.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CMD:">
+      <Text layoutX="134.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RUN:">
          <font>
             <Font size="17.0" />
          </font>

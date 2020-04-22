@@ -7,7 +7,7 @@ public class VirtualDocker implements Serializable {
 	final public static String DELIM = "aF3g1EFhonD67MHpkHm49xki6DLUUZgAKegw5IAz";
 
 	private String image;
-	private String cmd;
+	private String run;
 	private String inputPrefix;
 
 	private String dockerText = null;
@@ -25,7 +25,7 @@ public class VirtualDocker implements Serializable {
 		if (cmd == null) cmd = "";
 		if (inputPrefix == null) inputPrefix = "";
 		this.image = image;
-		this.cmd = cmd;
+		this.run = cmd;
 		this.inputPrefix = inputPrefix;
 	}
 
@@ -39,8 +39,8 @@ public class VirtualDocker implements Serializable {
 			ret += "\nWORKDIR usr/local/runme";
 			ret += "\nCOPY " + projectLocation + " project";
 			ret += "\nWORKDIR project";
-			if (!cmd.equals(""))
-				ret += "\nCMD " + cmd;
+			if (!run.equals(""))
+				ret += "\nRUN " + run;
 		}
 		if (questions.size() == 0) return ret;
 		ret += "\nCMD ";
@@ -54,8 +54,8 @@ public class VirtualDocker implements Serializable {
 		return image;
 	}
 
-	public String getCmd() {
-		return cmd;
+	public String getRun() {
+		return run;
 	}
 
 	public String getPrefix() {

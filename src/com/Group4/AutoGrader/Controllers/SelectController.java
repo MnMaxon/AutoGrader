@@ -25,6 +25,7 @@ public class SelectController extends Controller {
 	public Button cancelBtn;
 	public TextField locationText;
 	public ComboBox combo;
+
 	@Override
 	public String getFileName() {
 		return "SelectAssignmentView.fxml";
@@ -41,29 +42,32 @@ public class SelectController extends Controller {
 		filechooser.setTitle("Open Auto-Grader Project");
 		Stage stage = new Stage();
 		File file = filechooser.showOpenDialog(stage);
-		if(file != null){
+		if (file != null) {
 			Assignment temp = Assignment.load(file.getAbsolutePath());
 			System.out.println(AutoGrader.files.size());
 			new EditController(temp).show();
 		}
 	}
-	public void openRecent(){
+
+	public void openRecent() {
 		String file = (String) combo.getSelectionModel().getSelectedItem();
 		Assignment temp = Assignment.load(file);
 		new EditController(temp).show();
 	}
-	public void recents(){
+
+	public void recents() {
 		ObservableList<String> fs = FXCollections.observableArrayList();
 		fs.addAll(AutoGrader.files);
 		combo.setItems(fs);
 	}
-	public void openByText(){
+
+	public void openByText() {
 		String loc = locationText.getText();
-		if(!loc.isEmpty()) {
-			Assignment temp = Assignment.load(loc);
-			new EditController(temp).show();
+		if (!loc.isEmpty()) {
+			new DockTemplateController(loc).show();
 		}
 	}
+
 	public void newAssignment() {
 		fileName.setVisible(true);
 		confirmBtn.setVisible(true);
