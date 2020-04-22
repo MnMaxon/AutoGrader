@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,7 @@ public class AutoGrader extends Application {
 	 * The main jfx stage
 	 */
 	private static Stage mainStage;
+	public static ArrayList<String> files = new ArrayList<>();
 
 	/**
 	 * Gives the main jfx stage, used to switch between views
