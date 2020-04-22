@@ -73,6 +73,8 @@ public class RunController extends Controller {
 	}
 
 	public void run() {
+		if(!asgmtLoc.getText().isEmpty()) assignment = true;
+		if(!projLoc.getText().isEmpty()) project = true;
         if (assignment && project) {
             if (multipleRadio.isSelected()) {
                 File file = new File(projLoc.getText());
