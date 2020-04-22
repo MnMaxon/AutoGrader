@@ -103,7 +103,7 @@ public class AutoGrader extends Application {
 		DockerUtils.test();
 	}
 
-	public void saveRecents() {
+	public static void saveRecents() {
 		File f = new File("data.txt");
 		try {
 			FileOutputStream file = new FileOutputStream(f);
@@ -115,7 +115,21 @@ public class AutoGrader extends Application {
 			e.printStackTrace();
 		}
 	}
+	public static void loadRecents(){
+		if(new File("data.txt").exists()){
+			FileInputStream fin = null;
+			try {
+				fin = new FileInputStream("data.txt");
+				ObjectInputStream object = new ObjectInputStream(fin);
+				files = (ArrayList<String>) object.readObject();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 
+
+
+		}
+	}
 	/**
 	 * Saves all of the application's data
 	 */

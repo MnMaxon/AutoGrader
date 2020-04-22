@@ -2,8 +2,8 @@ package com.Group4.AutoGrader.Model;
 
 import com.Group4.AutoGrader.AutoGrader;
 import com.Group4.AutoGrader.Controllers.MultipleResultsController;
-import com.Group4.AutoGrader.Controllers.ResultsController;
 import org.apache.commons.io.FileUtils;
+
 
 import java.io.*;
 import java.util.ArrayList;
