@@ -2,16 +2,16 @@ package com.Group4.AutoGrader.Controllers;
 
 import com.Group4.AutoGrader.AutoGrader;
 import com.Group4.AutoGrader.Model.Assignment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class SelectController extends Controller {
 	/**
@@ -24,6 +24,7 @@ public class SelectController extends Controller {
 	public Button confirmBtn;
 	public Button cancelBtn;
 	public TextField locationText;
+	public ComboBox combo;
 	@Override
 	public String getFileName() {
 		return "SelectAssignmentView.fxml";
@@ -45,6 +46,16 @@ public class SelectController extends Controller {
 			System.out.println(AutoGrader.files.size());
 			new EditController(temp).show();
 		}
+	}
+	public void openRecent(){
+		String file = (String) combo.getSelectionModel().getSelectedItem();
+		Assignment temp = Assignment.load(file);
+		new EditController(temp).show();
+	}
+	public void recents(){
+		ObservableList<String> fs = FXCollections.observableArrayList();
+		fs.addAll(AutoGrader.files);
+		combo.setItems(fs);
 	}
 	public void openByText(){
 		String loc = locationText.getText();

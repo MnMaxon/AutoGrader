@@ -1,5 +1,6 @@
 package com.Group4.AutoGrader.Controllers;
 
+import com.Group4.AutoGrader.AutoGrader;
 import com.Group4.AutoGrader.Model.Assignment;
 import com.Group4.AutoGrader.Model.Question;
 import javafx.collections.FXCollections;
@@ -11,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class EditController extends Controller {
 	/**
@@ -70,7 +70,7 @@ public class EditController extends Controller {
 			othertemp.setOutput(outputArea.getText());
 			asmt.getQuestions().add(othertemp);
 		}
-
+		AutoGrader.saveRecents();
 		asmt.save();
 		new EditController(asmt).show();
 	}
@@ -99,7 +99,11 @@ public class EditController extends Controller {
 	}
 
 	public void savenquit() {
-		asmt.save();
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		new MainController().show();
 	}
 
