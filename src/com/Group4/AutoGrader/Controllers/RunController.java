@@ -47,7 +47,7 @@ public class RunController extends Controller {
 	public void open(){
 		//TODO open file that they select
 		//new EditController().show();
-		runBtn.setVisible(true);
+		runBtn.setDisable(false);
 		FileChooser filechooser = new FileChooser();
 		filechooser.setTitle("Choose Assignment File");
 		Stage stage = new Stage();
