@@ -1,6 +1,8 @@
 package com.Group4.AutoGrader;
 
 import com.Group4.AutoGrader.Controllers.MainController;
+import com.Group4.AutoGrader.Model.DockerUtils;
+import com.Group4.AutoGrader.Model.VirtualDocker;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -30,6 +32,55 @@ public class AutoGrader extends Application {
 		return mainStage;
 	}
 
+
+	public void dockerTest() {
+		runCommand("docker rm AutoGrader");
+		System.out.println(runCommandString("docker run --name AutoGrader hello-world"));
+		runCommand("docker rm AutoGrader");
+	}
+
+	public static ArrayList<String> runCommand(String command) {
+		ArrayList<String> ar = new ArrayList<>();
+		try {
+			Runtime rt = Runtime.getRuntime();
+			Process pr = rt.exec(command);
+			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+			BufferedReader error = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
+			ProcessBuilder pv = new ProcessBuilder();
+
+			ArrayList<String> list = new ArrayList<>();
+			String line = null;
+
+
+//			int exitVal = pr.waitFor();
+//			System.out.println("Exited with error code " + exitVal);
+			while ((line = input.readLine()) != null) {
+				if (line.equals(VirtualDocker.DELIM)) {
+					String eLine;
+					while ((eLine = error.readLine()) != null && !eLine.contains(VirtualDocker.DELIM))
+						list.add(eLine);
+				}
+				list.add(line);
+			}
+			while ((line = error.readLine()) != null) list.add(line);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			ArrayList<String> ret = new ArrayList<>();
+			ret.add(e.getMessage());
+			return ret;
+		}
+	}
+
+	public static String runCommandString(String command) {
+		StringBuilder ret = new StringBuilder();
+		for (String s : runCommand(command)) {
+			if (!ret.toString().equals("")) ret.append("\n");
+			ret.append(s);
+		}
+		return ret.toString();
+	}
+
 	/**
 	 * Sets up initial view
 	 *
@@ -49,40 +100,18 @@ public class AutoGrader extends Application {
 		primaryStage.setTitle("AutoGrader");
 		mainStage = primaryStage;
 		new MainController().show();
-		dockerTest();
+		DockerUtils.test();
 	}
-	public void saveRecents(){
+
+	public void saveRecents() {
 		File f = new File("data.txt");
-		try{
+		try {
 			FileOutputStream file = new FileOutputStream(f);
 			ObjectOutputStream out = new ObjectOutputStream(file);
 			out.writeObject(files);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	public void dockerTest() {
-		try {
-			Runtime rt = Runtime.getRuntime();
-			System.out.println("AAAAAAA");
-			rt.exec("docker rm AutoGrader");
-			Process pr = rt.exec("docker run --name AutoGrader hello-world");
-			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-
-			String line=null;
-			while((line=input.readLine()) != null) {
-				System.out.println(line);
-			}
-
-			int exitVal = pr.waitFor();
-			System.out.println("Exited with error code "+exitVal);
-
-			rt.exec("docker rm AutoGrader");
-			System.out.println("Done");
-		} catch (Exception e) {
-			System.out.println("Docker ERROR");
 			e.printStackTrace();
 		}
 	}

@@ -1,10 +1,12 @@
 package com.Group4.AutoGrader.Model;
 
 import com.Group4.AutoGrader.AutoGrader;
+import com.Group4.AutoGrader.Controllers.MultipleResultsController;
 import com.Group4.AutoGrader.Controllers.ResultsController;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,16 +26,23 @@ public class DockerUtils {
 			assignment.getQuestions().add(new Question(0, "", "0.0"));
 
 			List<String> answers = runProject("C:\\Users\\User\\IdeaProjects\\untitled\\out", assignment);
-			new ResultsController(null, assignment, answers).show();
+			ArrayList<String> projectStrings = new ArrayList<String>();
+			projectStrings.add(f.getName());
+			projectStrings.add(f.getName());
+			List<List<String>> answersList = new ArrayList<>();
+			answersList.add(answers);
+			answersList.add(answers);
+			new MultipleResultsController(null, assignment, projectStrings, answersList).show();
+//			new ResultsController(null, assignment, answers).show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static List<String> runProject(String projectLocation, Assignment assignment){
+	public static List<String> runProject(String projectLocation, Assignment assignment) {
 		generateDockerFile(assignment, projectLocation);
 		generateImage();
-		return Arrays.asList(runDocker().split("\n"+VirtualDocker.DELIM+"\n"));
+		return Arrays.asList(runDocker().split("\n" + VirtualDocker.DELIM + "\n"));
 	}
 
 	public static void generateDockerFile(Assignment assignment, String projectLocation) {
