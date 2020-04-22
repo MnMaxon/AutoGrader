@@ -65,7 +65,7 @@ public class MultipleResultsController extends Controller {
 		Stage stage = new Stage();
 		File file = filechooser.showOpenDialog(stage);
 		if (file != null)
-			locField.setText(file.getName());
+			locField.setText(file.getPath());
 	}
 
 	public void save() {
