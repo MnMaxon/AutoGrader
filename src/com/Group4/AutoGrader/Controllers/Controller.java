@@ -20,12 +20,13 @@ public abstract class Controller {
 	private final Parent root;
 
 	public boolean cancelShow = false;
+	private Scene scene = null;
 
 	/**
 	 * Sets up the FxmlLoader at the controller's file
 	 */
 	public Controller() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/"+getFileName()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/" + getFileName()));
 		fxmlLoader.setController(this);
 		try {
 			root = fxmlLoader.load();
@@ -44,9 +45,12 @@ public abstract class Controller {
 	/**
 	 * Shows the fxml file on the main stage
 	 */
-	public void show(){
+	public void show() {
 		if (cancelShow) return;
-		AutoGrader.getMainStage().setScene(new Scene(root, 600, 400));
+		if (scene == null) {
+			scene = new Scene(root, 600, 400);
+		}
+		AutoGrader.getMainStage().setScene(scene);
 		AutoGrader.getMainStage().show();
 	}
 

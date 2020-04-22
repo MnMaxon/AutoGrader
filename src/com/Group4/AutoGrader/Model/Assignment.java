@@ -26,6 +26,8 @@ public class Assignment implements Serializable {
 			FileOutputStream file = new FileOutputStream(lastLoc);
 			ObjectOutputStream out = new ObjectOutputStream(file);
 			out.writeObject(this);
+			file.close();
+			out.close();
 		} catch (Exception ex) {
 			System.out.println("ERROR: The file " + lastLoc + " could not be saved!");
 			ex.printStackTrace();
@@ -47,6 +49,8 @@ public class Assignment implements Serializable {
 				FileInputStream fin = new FileInputStream(fileLocation);
 				ObjectInputStream in = new ObjectInputStream(fin);
 				asmt = (Assignment) in.readObject();
+				in.close();
+				fin.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
