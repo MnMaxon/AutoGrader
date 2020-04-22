@@ -93,6 +93,7 @@ public class EditController extends Controller {
 	public void fill() {
 		add();
 		Question temp = (Question) list.getSelectionModel().getSelectedItem();
+		if (temp == null) return;
 		inputArea.setText(temp.getInput());
 		outputArea.setText(temp.getOutput());
 		replaceBtn.setVisible(true);

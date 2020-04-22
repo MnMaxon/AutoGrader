@@ -19,7 +19,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField layoutX="200.0" layoutY="161.0" promptText="Project Location">
+      <TextField fx:id="projLoc" layoutX="200.0" layoutY="161.0" promptText="Project Location">
          <font>
             <Font size="16.0" />
          </font>
@@ -35,8 +35,8 @@
          </font>
       </Button>
       <RadioButton layoutX="322.0" layoutY="208.0" mnemonicParsing="false" text="Multiple Projects" />
-      <RadioButton layoutX="200.0" layoutY="208.0" mnemonicParsing="false" text="Single Project" />
-      <TextField layoutX="203.0" layoutY="236.0" promptText="Assignment Location">
+      <RadioButton fx:id="singleRadio" layoutX="200.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#singleClick" selected="true" text="Single Project" />
+      <TextField fx:id="asgmtLoc" layoutX="203.0" layoutY="236.0" promptText="Assignment Location">
          <font>
             <Font size="16.0" />
          </font>
