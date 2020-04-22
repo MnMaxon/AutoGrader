@@ -1,9 +1,12 @@
 package com.Group4.AutoGrader.Model;
 
 import com.Group4.AutoGrader.AutoGrader;
+import com.Group4.AutoGrader.Controllers.ResultsController;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DockerUtils {
 	public static void test() {
@@ -11,18 +14,26 @@ public class DockerUtils {
 			File f = new File("autoTest");
 			if (f.exists()) f.delete();
 			Assignment assignment = Assignment.load("autoTest");
-			assignment.getDocker().setDockerInfo("openjdk:13-jdk-alpine", "", "java -jar artifacts/untitled_jar/untitled.jar");
-//			assignment.getDocker().setDockerInfo("openjdk:13", "", "java -jar untitled.jar");
+			assignment.getDocker().setDockerInfo("openjdk:13", "", "java -jar artifacts/untitled_jar/untitled.jar");
 			assignment.getQuestions().add(new Question(0, "", "0.0"));
 			assignment.getQuestions().add(new Question(0, "rrr", "0.0"));
 			assignment.getQuestions().add(new Question(0, "", "0.0"));
-			generateDockerFile(assignment, "C:\\Users\\User\\IdeaProjects\\untitled\\out");
-			generateImage();
-			System.out.println(runDocker());
-			System.out.println("Done");
+			assignment.getQuestions().add(new Question(0, "", "0.0"));
+			assignment.getQuestions().add(new Question(0, "", "0.0"));
+			assignment.getQuestions().add(new Question(0, "", "0.0"));
+			assignment.getQuestions().add(new Question(0, "", "0.0"));
+
+			List<String> answers = runProject("C:\\Users\\User\\IdeaProjects\\untitled\\out", assignment);
+			new ResultsController(null, assignment, answers).show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static List<String> runProject(String projectLocation, Assignment assignment){
+		generateDockerFile(assignment, projectLocation);
+		generateImage();
+		return Arrays.asList(runDocker().split("\n"+VirtualDocker.DELIM+"\n"));
 	}
 
 	public static void generateDockerFile(Assignment assignment, String projectLocation) {
