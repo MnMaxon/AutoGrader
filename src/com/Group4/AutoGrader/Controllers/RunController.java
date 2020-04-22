@@ -3,6 +3,7 @@ package com.Group4.AutoGrader.Controllers;
 import com.Group4.AutoGrader.AutoGrader;
 import com.Group4.AutoGrader.Model.Assignment;
 import com.Group4.AutoGrader.Model.DockerUtils;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -56,8 +57,8 @@ public class RunController extends Controller {
 			asgmtLoc.setText(file.getAbsolutePath());
 			assignment = true;
 		}
-		checkRun();
 	}
+
 	public void openProj(){
 		//TODO open file that they select
 		//new EditController().show();
@@ -69,25 +70,28 @@ public class RunController extends Controller {
 			project = true;
 			projLoc.setText(file.getPath());
 		}
-		checkRun();
 	}
-	public void checkRun(){
-		if(assignment && project) runBtn.setDisable(false);
-		else runBtn.setDisable(true);
-	}
-	public void run(){
-			if(multipleRadio.isSelected()) {
-				File file = new File(projLoc.getText());
-				List<String> projects = Arrays.asList(file.list());
-				List<List<String>> answers = new ArrayList<>();
-				for(String s: projects){
-					List<String> temp = DockerUtils.runProject(s, Assignment.load(asgmtLoc.getText()));
-					answers.add(temp);
-				}
-			new MultipleResultsController(this, Assignment.load(asgmtLoc.getText()), projects, answers).show();
-			}else{
-				List<String> answers = DockerUtils.runProject(projLoc.getText(), Assignment.load(asgmtLoc.getText()));
-				new ResultsController(this, Assignment.load(asgmtLoc.getText()),answers).show();
-			}
-		}
+
+	public void run() {
+        if (assignment && project) {
+            if (multipleRadio.isSelected()) {
+                File file = new File(projLoc.getText());
+                List<String> projects = Arrays.asList(file.list());
+                List<List<String>> answers = new ArrayList<>();
+                for (String s : projects) {
+                    List<String> temp = DockerUtils.runProject(s, Assignment.load(asgmtLoc.getText()));
+                    answers.add(temp);
+                }
+                new MultipleResultsController(this, Assignment.load(asgmtLoc.getText()), projects, answers).show();
+            } else {
+                List<String> answers = DockerUtils.runProject(projLoc.getText(), Assignment.load(asgmtLoc.getText()));
+                new ResultsController(this, Assignment.load(asgmtLoc.getText()), answers).show();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Running");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter valid assignment and project file locations");
+        }
+    }
 }
