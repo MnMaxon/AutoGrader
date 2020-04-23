@@ -26,7 +26,7 @@ public abstract class Controller {
 	 * Sets up the FxmlLoader at the controller's file
 	 */
 	public Controller() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/" + getFileName()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/Group4/AutoGrader/View/" + getFileName()));
 		fxmlLoader.setController(this);
 		try {
 			root = fxmlLoader.load();
