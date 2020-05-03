@@ -41,9 +41,9 @@ public class ResultsController extends Controller {
 		for (int i = 0; i < assignment.getQuestions().size(); i++) {
 			Question q = assignment.getQuestions().get(i);
 			if (i < answers.size() && answers.get(i).equals(q.getOutput())) {
+				correct++;
 				if (filterCheck.isSelected()) continue;
 				addLabel("Correct", Color.GREEN, 0, shown);
-				correct++;
 			} else {
 				addLabel("Incorrect", Color.RED, 0, shown);
 			}
@@ -52,7 +52,8 @@ public class ResultsController extends Controller {
 			addLabel(answers.get(i), 3, shown);
 			shown++;
 		}
-		this.correct.setText(Math.round(1000. * (correct * 10) / (assignment.getQuestions().size() * .1)) / 1000.+"% Correct");;
+		this.correct.setText(Math.round(1000. * (correct * 10) / (assignment.getQuestions().size() * .1)) / 1000. + "% Correct");
+		;
 		grid.getStyleClass().add("grid");
 		grid.setGridLinesVisible(true);
 	}
@@ -62,7 +63,6 @@ public class ResultsController extends Controller {
 		Node source = (Node) e.getSource();
 		Integer colIndex = GridPane.getColumnIndex(source);
 		Integer rowIndex = GridPane.getRowIndex(source);
-//		System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
 	}
 
 	public void addLabel(String s, int x, int y) {

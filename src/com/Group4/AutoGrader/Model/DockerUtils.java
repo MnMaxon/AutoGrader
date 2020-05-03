@@ -42,27 +42,42 @@ public class DockerUtils {
 	public static List<String> runProject(String projectLocation, Assignment assignment) {
 		generateDockerFile(assignment, projectLocation);
 		generateImage();
-		return Arrays.asList(runDocker().split("\n" + VirtualDocker.DELIM + "\n"));
+		String s = runDocker();
+		System.out.println(")))))))))))))This is the s:\n'" + s + "'");
+
+		if (s.startsWith(VirtualDocker.DELIM)) s = "\n" + s;
+		if (s.endsWith(VirtualDocker.DELIM)) s = s + "\n";
+		s = s.replace(VirtualDocker.DELIM + "\n" + VirtualDocker.DELIM, VirtualDocker.DELIM + "\n\n" + VirtualDocker.DELIM);
+		System.out.println(")))))))))))))This is the s:\n'" + s + "'");
+		List<String> strings =new ArrayList<>();
+		while (s.startsWith("\n" + VirtualDocker.DELIM + "\n")){
+			s=s.replaceFirst("\n" + VirtualDocker.DELIM + "\n","");
+			strings.add("");
+		}
+		int end = 0;
+		while (s.endsWith("\n" + VirtualDocker.DELIM + "\n")){
+			s=s.substring(0,s.length()-("\n" + VirtualDocker.DELIM + "\n").length());
+			end++;
+		}
+		strings.addAll(Arrays.asList(s.split("\n" + VirtualDocker.DELIM + "\n")));
+		for (int i = 0;i<end;i++)strings.add("");
+
+		return strings;
 	}
 
 	public static void generateDockerFile(Assignment assignment, String projectLocation) {
-		System.out.println("********");
-		System.out.println(projectLocation);
 		File proj = new File(projectLocation);
 		if (!proj.exists()) return;
 		if (!proj.isDirectory()) proj = new File(proj.getParent());
 		File copytoFile = new File("projects/" + proj.getName());
-		System.out.println("1!");
 		try {
 			if (copytoFile.exists()) FileUtils.deleteDirectory(copytoFile);
 			FileUtils.copyDirectory(proj, copytoFile);
 		} catch (IOException e) {
-			System.out.println("Failed to copy project!");
 			e.printStackTrace();
 			return;
 		}
 
-System.out.println("2!");
 		try {
 			File file = new File("Dockerfile");
 			if (file.exists()) file.delete();
@@ -71,11 +86,9 @@ System.out.println("2!");
 			ex.printStackTrace();
 		}
 		try {
-			System.out.println("3!");
 			FileWriter writer = new FileWriter("Dockerfile");
 			writer.write(assignment.getDocker().generateFinal(copytoFile.getPath(), assignment.getQuestions()));
 			writer.close();
-			System.out.println(assignment.getDocker().generateFinal(projectLocation, assignment.getQuestions()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,7 +100,6 @@ System.out.println("2!");
 
 	public static void generateImage(String dockerPath) {
 		File f = new File(dockerPath);
-		System.out.println(AutoGrader.runCommandString("docker build -t autograder " + f.getAbsolutePath()));
 	}
 
 	public static String runDocker() {

@@ -44,7 +44,6 @@ public class SelectController extends Controller {
 		File file = filechooser.showOpenDialog(stage);
 		if (file != null) {
 			Assignment temp = Assignment.load(file.getAbsolutePath());
-			System.out.println(AutoGrader.files.size());
 			new EditController(temp).show();
 		}
 	}

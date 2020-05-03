@@ -30,7 +30,6 @@ public class VirtualDocker implements Serializable {
 	}
 
 	public String generateFinal(String projectLocation, List<Question> questions) {
-		System.out.println("-"+projectLocation);
 		projectLocation = '\"' + projectLocation.replace("\\", "/") + '\"';
 		String ret = "";
 		if (dockerText != null) {
@@ -38,9 +37,9 @@ public class VirtualDocker implements Serializable {
 		} else {
 			ret = "FROM " + image;
 			ret += "\nWORKDIR usr/local/runme";
-			ret += "\nCOPY " + projectLocation + " project";
+			ret += "\nCOPY [" + projectLocation + ", \"project\"]";
 			ret += "\nWORKDIR project";
-			if (!run.equals(""))
+			if (run!=null && !run.equals(""))
 				ret += "\nRUN " + run;
 		}
 		if (questions.size() == 0) return ret;

@@ -29,7 +29,6 @@ public class Assignment implements Serializable {
 			file.close();
 			out.close();
 		} catch (Exception ex) {
-			System.out.println("ERROR: The file " + lastLoc + " could not be saved!");
 			ex.printStackTrace();
 		}
 	}
@@ -62,7 +61,6 @@ public class Assignment implements Serializable {
 			AutoGrader.files.remove(asmt.lastLoc);
 			AutoGrader.files.add(0, asmt.lastLoc);
 		}
-		System.out.println(AutoGrader.files);
 		return asmt;
 	}
 }

@@ -45,9 +45,6 @@ public class EditController extends Controller {
 		inputArea.setVisible(false);
 		outputArea.setVisible(false);
 		replaceBtn.setVisible(false);
-
-		//System.out.println(asmt.getQuestions().size());
-
 	}
 
 	@Override

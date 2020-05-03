@@ -91,6 +91,7 @@ public class RunController extends Controller {
 				}
 				new MultipleResultsController(this, Assignment.load(asgmtLoc.getText()), projects, answers).show();
 			} else {
+				System.out.println("******************************");
 				List<String> answers = DockerUtils.runProject(projLoc.getText(), Assignment.load(asgmtLoc.getText()));
 				new ResultsController(this, Assignment.load(asgmtLoc.getText()), answers).show();
 			}
