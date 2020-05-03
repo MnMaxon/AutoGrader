@@ -43,12 +43,12 @@ public class DockerUtils {
 		generateDockerFile(assignment, projectLocation);
 		generateImage();
 		String s = runDocker();
-		System.out.println(")))))))))))))This is the s:\n'" + s + "'");
+//		System.out.println(")))))))))))))This is the s:\n'" + s + "'");
 
 		if (s.startsWith(VirtualDocker.DELIM)) s = "\n" + s;
 		if (s.endsWith(VirtualDocker.DELIM)) s = s + "\n";
 		s = s.replace(VirtualDocker.DELIM + "\n" + VirtualDocker.DELIM, VirtualDocker.DELIM + "\n\n" + VirtualDocker.DELIM);
-		System.out.println(")))))))))))))This is the s:\n'" + s + "'");
+//		System.out.println(")))))))))))))This is the s:\n'" + s + "'");
 		List<String> strings =new ArrayList<>();
 		while (s.startsWith("\n" + VirtualDocker.DELIM + "\n")){
 			s=s.replaceFirst("\n" + VirtualDocker.DELIM + "\n","");
@@ -100,6 +100,7 @@ public class DockerUtils {
 
 	public static void generateImage(String dockerPath) {
 		File f = new File(dockerPath);
+		System.out.println(AutoGrader.runCommandString("docker build -t autograder " + f.getAbsolutePath()));
 	}
 
 	public static String runDocker() {
